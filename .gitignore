@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.server.out.log
+.server.err.log
+.start.out.log
+.start.err.log
+.DS_Store
+
