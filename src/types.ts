@@ -5,6 +5,9 @@ export interface Tile {
   y: number;
   type: TileType;
   cabanaId?: string;
+}
+
+export interface MapTile extends Tile {
   isAvailable?: boolean;
 }
 
@@ -18,16 +21,26 @@ export interface BookCabanaRequest {
   guestName: string;
 }
 
-export interface Cabana {
+export interface CabanaLocation {
   id: string;
   x: number;
   y: number;
+}
+
+export interface Cabana extends CabanaLocation {
   isAvailable: boolean;
 }
 
-export interface ResortMap {
+export interface ResortMapLayout {
   rows: number;
   cols: number;
   tiles: Tile[][];
+  cabanas: CabanaLocation[];
+}
+
+export interface ResortMapView {
+  rows: number;
+  cols: number;
+  tiles: MapTile[][];
   cabanas: Cabana[];
 }

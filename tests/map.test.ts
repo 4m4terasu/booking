@@ -19,7 +19,12 @@ describe("parseMapFile", () => {
       id: "cabana-3-11",
       x: 3,
       y: 11,
-      isAvailable: true,
+    });
+    expect(resortMap.tiles[11][3]).toMatchObject({
+      x: 3,
+      y: 11,
+      type: "cabana",
+      cabanaId: "cabana-3-11",
     });
   });
 });

@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 
-import { Cabana, ResortMap, Tile, TileType } from "./types.js";
+import { CabanaLocation, ResortMapLayout, Tile, TileType } from "./types.js";
 
 const TILE_TYPE_BY_SYMBOL: Record<string, TileType> = {
   ".": "empty",
@@ -14,7 +14,7 @@ function createCabanaId(x: number, y: number): string {
   return `cabana-${x}-${y}`;
 }
 
-export function parseMapFile(mapPath: string): ResortMap {
+export function parseMapFile(mapPath: string): ResortMapLayout {
   const rawMap = readFileSync(mapPath, "utf8").trimEnd();
   const rows = rawMap.split(/\r?\n/);
 
@@ -24,7 +24,7 @@ export function parseMapFile(mapPath: string): ResortMap {
 
   const cols = rows[0].length;
   const tiles: Tile[][] = [];
-  const cabanas: Cabana[] = [];
+  const cabanas: CabanaLocation[] = [];
 
   rows.forEach((row, y) => {
     if (row.length !== cols) {
@@ -43,11 +43,10 @@ export function parseMapFile(mapPath: string): ResortMap {
       }
 
       const cabanaId = createCabanaId(x, y);
-      const cabana: Cabana = {
+      const cabana: CabanaLocation = {
         id: cabanaId,
         x,
         y,
-        isAvailable: true,
       };
 
       cabanas.push(cabana);
@@ -57,7 +56,6 @@ export function parseMapFile(mapPath: string): ResortMap {
         y,
         type,
         cabanaId,
-        isAvailable: cabana.isAvailable,
       };
     });
 
